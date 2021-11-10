@@ -115,7 +115,6 @@ fs.readFile(`06-build-page/project-dist/index.html`, 'utf-8', (err, readFile) =>
     }, (err, files) => {
       if (err) throw err;
       files.forEach(file => {
-
         if (file.name === 'header.html') {
           fs.readFile(`06-build-page/components/${file.name}`, 'utf-8', (err, data) => {
             if (err) throw err;
@@ -124,7 +123,6 @@ fs.readFile(`06-build-page/project-dist/index.html`, 'utf-8', (err, readFile) =>
               if (err) throw err;
             });
           })
-    
         }
       });
     })
@@ -204,11 +202,5 @@ fs.readdir('06-build-page/assets', {
         })
       })
     }
-    /*   if (item.isFile()) {
-          fs.stat(`03-files-in-folder/secret-folder/${item.name}`, (err, file) => {
-              if (err) throw err
-              console.log(`${item.name} - ${item.name.split('.').pop()} - ${(file.size)/1000}kb`)
-          });
-      } */
   });
 });
