@@ -8,25 +8,8 @@ const rl = readline.createInterface({
   output:process.stdout
 });
 
-
-rl.question('Enter text ... ', (answer) => {
-  fs.writeFile('02-write-file/text.txt',answer,(err)=>{
-    if(err) return err;
-  });
- 
-});
-
-
-rl.on('line', text=>{
-  fs.appendFile('02-write-file/text.txt',text,{flags:'a'},(err)=>{
-    if(err) throw err;
-    if(text === 'exit'){
-      console.log('Bye!');
-      process.exit();
-    }
-    console.log(`Your typed: ${text} `);
-  });
-
+fs.open('02-write-file/text.txt', 'w', (err) => {
+  if(err) throw err;
 });
 
 process.openStdin().on('keypress', function(chunk, key) {
@@ -35,3 +18,32 @@ process.openStdin().on('keypress', function(chunk, key) {
     process.exit();
   }
 });
+
+
+rl.question('Enter text ... ', (answer) => {
+  if(answer=='exit'){
+    console.log('Bye!')
+    process.exit();
+  }
+  fs.writeFile('02-write-file/text.txt',answer,(err)=>{
+    if(err) return err;
+  });
+});
+
+
+rl.on('line', text=>{
+  if(text === 'exit'){
+    text=''
+    console.log('Bye!'); 
+    process.exit();
+     
+  }
+  fs.appendFile('02-write-file/text.txt',text,{flags:'a'},(err)=>{
+    if(err) throw err;
+    if(text === 'exit'){
+      console.log('Bye!');    
+    }
+    console.log(`Your typed: ${text} `);
+  });
+});
+
