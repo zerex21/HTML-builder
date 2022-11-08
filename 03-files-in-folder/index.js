@@ -7,7 +7,7 @@ fs.readdir('03-files-in-folder/secret-folder', {withFileTypes: true}, function (
         if (item.isFile()) {
             fs.stat(`03-files-in-folder/secret-folder/${item.name}`, (err, file) => {
                 if (err) throw err
-                console.log(`${item.name} - ${item.name.split('.').pop()} - ${(file.size)/1000}kb`)
+                console.log(`${item.name.split('.').shift()} - ${item.name.split('.').pop()} - ${(file.size)/1000}kb`)
             });
         }
     });
